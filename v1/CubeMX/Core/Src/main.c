@@ -19,6 +19,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "dac.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -44,6 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint16_t ADC_buff[1];
 
 /* USER CODE END PV */
 
@@ -88,6 +91,9 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_ADC1_Init();
+  MX_DAC_Init();
+  MX_TIM4_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
   initialize();
 
@@ -102,6 +108,8 @@ int main(void)
     /* USER CODE BEGIN 3 */
      loop_main();
   }
+//  HAL_ADC_Stop_DMA(&hadc1);
+  for(;;);
   /* USER CODE END 3 */
 }
 
@@ -151,6 +159,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
 int _write(int file, char* ptr, int len)
 {
     (void)file;
